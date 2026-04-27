@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- https://go.microsoft.com/fwlink/?LinkID=208121. -->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\Wael\Desktop\WaterMonitoringIOTDeploy</_PublishTargetUrl>
+    <History>True|2026-04-27T18:15:27.0863576Z||;True|2026-04-27T21:07:20.7948655+03:00||;True|2026-04-27T21:06:56.5421126+03:00||;True|2026-04-27T20:56:32.2995419+03:00||;True|2026-04-27T20:00:29.4604564+03:00||;True|2026-04-27T19:54:00.0234479+03:00||;True|2026-04-26T16:11:40.9497512+03:00||;True|2026-04-26T16:01:17.3076664+03:00||;True|2026-04-26T15:53:29.6033071+03:00||;True|2026-04-26T15:44:01.8476349+03:00||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include=".env">
+      <publishTime>04/26/2026 15:39:13</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
