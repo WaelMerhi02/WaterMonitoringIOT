@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System.Xml.Linq;
 using WaterMonitoringIOT.Interfaces;
 using WaterMonitoringIOT.Models;
 
@@ -55,6 +56,21 @@ namespace WaterMonitoringIOT.Repo
         {
             var device = await context.Devices.ToListAsync();
             return device;
+        }
+
+        public async Task<List<SensorStatisticsDto>> GetSensorStatistics(int DeviceId, DateTime StartDate, DateTime EndDate)
+        {
+            List<SensorStatisticsDto> result = await context.Set<SensorStatisticsDto>()
+    .FromSqlRaw(
+        "EXEC GetSensorStatistics @DeviceId, @StartDate, @EndDate",
+        new SqlParameter("@DeviceId", DeviceId),
+        new SqlParameter("@StartDate", StartDate),
+        new SqlParameter("@EndDate", EndDate)
+    )
+    .AsNoTracking()
+    .ToListAsync();
+
+            return result;
         }
     }
 }

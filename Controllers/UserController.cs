@@ -67,5 +67,13 @@ namespace WaterMonitoringIOT.Controllers
             return Ok(await userInterface.GetDevices());
         }
 
+        [HttpGet]
+        [Authorize(Policy = "UserOnly")]
+        [Route("GetSensorStatistics")]
+        public async Task<IActionResult> GetSensorStatistics(int DeviceId,DateTime StartDate,DateTime EndDate)
+        {
+            return Ok(await userInterface.GetSensorStatistics(DeviceId, StartDate, EndDate));
+        }
+
     }
 }

@@ -9,5 +9,6 @@ namespace WaterMonitoringIOT.Interfaces
         public Task<SensorReadings> GetSensorReading(int DeviceId);
         public Task<List<SensorReadingsLogs>> GetSensorReadingsLogs(int DeviceId);
         public Task<List<Devices>> GetDevices();
+        public Task<List<SensorStatisticsDto>> GetSensorStatistics(int DeviceId,DateTime StartDate,DateTime EndDate);
     }
 }

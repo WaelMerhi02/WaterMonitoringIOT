@@ -3,7 +3,7 @@
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\Wael\Desktop\WaterMonitoringIOTDeploy</_PublishTargetUrl>
-    <History>True|2026-04-28T16:31:53.0353630Z||;True|2026-04-28T19:30:41.8817809+03:00||;True|2026-04-28T13:44:45.0854366+03:00||;True|2026-04-28T12:22:28.0813268+03:00||;</History>
+    <History>True|2026-04-28T18:38:54.0962356Z||;True|2026-04-28T19:31:53.0353630+03:00||;True|2026-04-28T19:30:41.8817809+03:00||;True|2026-04-28T13:44:45.0854366+03:00||;True|2026-04-28T12:22:28.0813268+03:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
