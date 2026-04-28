@@ -7,5 +7,7 @@ namespace WaterMonitoringIOT.Interfaces
         public Task<(bool, string)> Login(string Username, string Password);
         public Task AddUser(string Name, string Username, string Password);
         public Task<SensorReadings> GetSensorReading(int DeviceId);
+        public Task<List<SensorReadingsLogs>> GetSensorReadingsLogs(int DeviceId);
+        public Task<List<Devices>> GetDevices();
     }
 }

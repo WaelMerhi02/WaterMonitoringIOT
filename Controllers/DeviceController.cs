@@ -44,13 +44,6 @@ namespace WaterMonitoringIOT.Controllers
             await deviceInterface.AddDevice(DeviceName, DeviceCode, DevicePassword);
             return Ok("Device Added");
         }
-        
-        [HttpGet]
-        [Authorize(Policy = "UserOnly")]
-        [Route("GetDevices")]
-        public async Task<IActionResult> GetDevices()
-        {
-            return Ok(await deviceInterface.GetDevices());
-        }
+       
     }
 }

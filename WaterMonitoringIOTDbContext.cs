@@ -11,5 +11,6 @@ namespace WaterMonitoringIOT
         public DbSet<Devices> Devices { get; set; }
         public DbSet<Users> Users { get; set; }
         public DbSet<SensorReadings> SensorReadings { get; set; }
+        public DbSet<SensorReadingsLogs> SensorReadingsLogs { get; set; }
     }
 }

@@ -44,5 +44,17 @@ namespace WaterMonitoringIOT.Repo
              new SqlParameter("@Username", Username),
              new SqlParameter("@Password", HashedPassword));
         }
+
+        public async Task<List<SensorReadingsLogs>> GetSensorReadingsLogs(int DeviceId)
+        {
+            List<SensorReadingsLogs>? logs = await context.SensorReadingsLogs.Where(x => x.DeviceId == DeviceId).ToListAsync();
+            return logs;
+        }
+
+        public async Task<List<Devices>> GetDevices()
+        {
+            var device = await context.Devices.ToListAsync();
+            return device;
+        }
     }
 }

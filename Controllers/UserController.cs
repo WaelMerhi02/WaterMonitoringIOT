@@ -51,5 +51,21 @@ namespace WaterMonitoringIOT.Controllers
             return Ok(await userInterface.GetSensorReading(DeviceId));
         }
 
+        [HttpGet]
+        [Authorize(Policy = "UserOnly")]
+        [Route("GetSensorReadingLogs")]
+        public async Task<IActionResult> GetSensorReadingLogs(int DeviceId)
+        {
+            return Ok(await userInterface.GetSensorReadingsLogs(DeviceId));
+        }
+
+        [HttpGet]
+        [Authorize(Policy = "UserOnly")]
+        [Route("GetDevices")]
+        public async Task<IActionResult> GetDevices()
+        {
+            return Ok(await userInterface.GetDevices());
+        }
+
     }
 }

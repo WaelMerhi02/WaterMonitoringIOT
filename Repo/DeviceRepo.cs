@@ -30,11 +30,7 @@ namespace WaterMonitoringIOT.Repo
             return (true, token);
         }
 
-        public async Task<List<Devices>> GetDevices()
-        {
-           var device = await context.Devices.ToListAsync();
-            return device;
-        }
+       
         public async Task AddDevice(string DeviceName, string DeviceCode, string DevicePassword)
         {
             string HashedPassword= GlobalFunctions.HashPassword(DevicePassword);
@@ -54,5 +50,7 @@ namespace WaterMonitoringIOT.Repo
              new SqlParameter("@PHValue", PHValue),
              new SqlParameter("@Date", Date));
         }
+
+       
     }
 }
