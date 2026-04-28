@@ -30,7 +30,7 @@ namespace WaterMonitoringIOT.Controllers
             (bool, string) IsUserVerified = await userInterface.Login(Username, Password);
             if (IsUserVerified.Item1)
             {
-                return Ok(new { Token = IsUserVerified.Item2 });
+                return Ok(IsUserVerified.Item2);
             }
             return Unauthorized(new { Message = IsUserVerified.Item2 });
         }

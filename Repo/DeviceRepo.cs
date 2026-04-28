@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 using WaterMonitoringIOT.Interfaces;
 using WaterMonitoringIOT.Models;
 
@@ -30,7 +31,29 @@ namespace WaterMonitoringIOT.Repo
             return (true, token);
         }
 
-       
+        public async Task UpdateDeviceStatus(int deviceId, bool isActive)
+        {
+            if (!isActive)
+            {
+                    await context.Database.ExecuteSqlRawAsync(
+                 "EXEC TurnOffDeviceStatus @DeviceId",
+                new SqlParameter("@DeviceId", deviceId)
+                 );
+                    await context.SaveChangesAsync();
+
+            }
+            else
+            {
+                await context.Database.ExecuteSqlRawAsync(
+                 "EXEC TurnOnDeviceStatus @DeviceId",
+                new SqlParameter("@DeviceId", deviceId)
+                 );
+                await context.SaveChangesAsync();
+            }
+          
+        }
+
+
         public async Task AddDevice(string DeviceName, string DeviceCode, string DevicePassword)
         {
             string HashedPassword= GlobalFunctions.HashPassword(DevicePassword);

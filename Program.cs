@@ -1,7 +1,8 @@
 using DotNetEnv;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using WaterMonitoringIOT;
 using WaterMonitoringIOT.Interfaces;
@@ -88,6 +89,24 @@ builder.Services.AddAuthentication(options =>
         ValidAudience = jwtAudience,
         ClockSkew = TimeSpan.Zero
     };
+
+    options.Events = new JwtBearerEvents
+    {
+        OnMessageReceived = context =>
+        {
+            var accessToken = context.Request.Query["access_token"];
+
+            var path = context.HttpContext.Request.Path;
+
+            if (!string.IsNullOrEmpty(accessToken) &&
+                path.StartsWithSegments("/WaterMonitoringIOTHub"))
+            {
+                context.Token = accessToken;
+            }
+
+            return Task.CompletedTask;
+        }
+    };
 });
 
 builder.Services.AddCors(options =>
@@ -100,6 +119,12 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddSignalR(options =>
+{
+    options.KeepAliveInterval = TimeSpan.FromSeconds(15);
+    options.ClientTimeoutInterval = TimeSpan.FromMinutes(2);
+    options.HandshakeTimeout = TimeSpan.FromSeconds(30);
+});
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -108,11 +133,19 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseRouting();
 
 app.UseCors("AllowAll");
+
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<WaterMonitoringIOTHub>("/WaterMonitoringIOTHub", options =>
+{
+    options.Transports = HttpTransportType.WebSockets |
+                         HttpTransportType.LongPolling;
+});
 
 app.Run();

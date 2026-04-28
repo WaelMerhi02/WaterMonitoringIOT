@@ -32,7 +32,7 @@ namespace WaterMonitoringIOT.Controllers
             (bool, string) IsDeviceVerified = await deviceInterface.VerifyDevice(DeviceCode, DevicePassword);
             if (IsDeviceVerified.Item1)
             {
-                return Ok(new { Token = IsDeviceVerified.Item2 });
+                return Ok(IsDeviceVerified.Item2);
             }
             return Unauthorized(new { Message = IsDeviceVerified.Item2 });
         }
@@ -44,6 +44,8 @@ namespace WaterMonitoringIOT.Controllers
             await deviceInterface.AddDevice(DeviceName, DeviceCode, DevicePassword);
             return Ok("Device Added");
         }
+
+
        
     }
 }

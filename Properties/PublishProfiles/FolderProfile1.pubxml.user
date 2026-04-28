@@ -3,7 +3,12 @@
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\Wael\Desktop\WaterMonitoringIOTDeploy</_PublishTargetUrl>
-    <History>True|2026-04-28T09:22:28.0813268Z||;</History>
+    <History>True|2026-04-28T10:44:45.0854366Z||;True|2026-04-28T12:22:28.0813268+03:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
+  <ItemGroup>
+    <File Include=".env">
+      <publishTime>04/28/2026 11:55:26</publishTime>
+    </File>
+  </ItemGroup>
 </Project>
