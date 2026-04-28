@@ -33,24 +33,18 @@ namespace WaterMonitoringIOT.Repo
 
         public async Task UpdateDeviceStatus(int deviceId, bool isActive)
         {
-            if (!isActive)
-            {
-                    await context.Database.ExecuteSqlRawAsync(
-                 "EXEC TurnOffDeviceStatus @DeviceId",
-                new SqlParameter("@DeviceId", deviceId)
-                 );
-                    await context.SaveChangesAsync();
+            string connectionString = Environment.GetEnvironmentVariable("ConnString");
 
-            }
-            else
-            {
-                await context.Database.ExecuteSqlRawAsync(
-                 "EXEC TurnOnDeviceStatus @DeviceId",
-                new SqlParameter("@DeviceId", deviceId)
-                 );
-                await context.SaveChangesAsync();
-            }
-          
+            await using var connection = new SqlConnection(connectionString);
+            await connection.OpenAsync();
+
+            await using var command = new SqlCommand("UpdateDeviceStatus", connection);
+            command.CommandType = CommandType.StoredProcedure;
+
+            command.Parameters.Add("@DeviceId", SqlDbType.Int).Value = deviceId;
+            command.Parameters.Add("@IsActive", SqlDbType.Bit).Value = isActive;
+
+            await command.ExecuteNonQueryAsync();
         }
 
 
