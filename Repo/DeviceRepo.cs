@@ -77,51 +77,37 @@ namespace WaterMonitoringIOT.Repo
              new SqlParameter("@PHValue", PHValue),
              new SqlParameter("@Date", Date));
         }
-
-        public async Task<bool> GetForceRead(int DeviceId)
+        public async Task<DeviceCommandsDTO> GetDeviceCommands(int deviceId)
         {
-            var device = await context.Devices.FirstOrDefaultAsync(d => d.Id == DeviceId);
-            if (device == null) return false;
+            Devices device = await context.Devices.FirstOrDefaultAsync(d => d.Id == deviceId);
 
-            if (device.ForceRead == true)
+            if (device == null)
             {
+                return null;
+            }
+
+            DeviceCommandsDTO commands = new DeviceCommandsDTO
+            {
+                ForceRead = device.ForceRead,
+                ForceActuatorOn = device.ForceActuatorOn,
+                ForceActuatorOff = device.ForceActuatorOff
+            };
+
+            if (device.ForceRead)
                 device.ForceRead = false;
-                await context.SaveChangesAsync();
-                return true;
-            }
 
-            return false;
-        }
-
-        public async Task<bool> GetForceActuatorOn(int DeviceId)
-        {
-            var device = await context.Devices.FirstOrDefaultAsync(d => d.Id == DeviceId);
-            if (device == null) return false;
-
-            if (device.ForceActuatorOn == true)
-            {
+            if (device.ForceActuatorOn)
                 device.ForceActuatorOn = false;
-                await context.SaveChangesAsync();
-                return true;
-            }
 
-            return false;
-        }
-
-        public async Task<bool> GetForceActuatorOff(int DeviceId)
-        {
-            var device = await context.Devices.FirstOrDefaultAsync(d => d.Id == DeviceId);
-            if (device == null) return false;
-
-            if (device.ForceActuatorOff == true)
-            {
+            if (device.ForceActuatorOff)
                 device.ForceActuatorOff = false;
-                await context.SaveChangesAsync();
-                return true;
-            }
 
-            return false;
+            await context.SaveChangesAsync();
+
+            return commands;
         }
+
+
 
 
     }

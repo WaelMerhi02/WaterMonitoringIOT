@@ -45,33 +45,16 @@ namespace WaterMonitoringIOT.Controllers
             return Ok("Device Added");
         }
 
-
-        [Route("GetForceRead")]
+        [Route("GetDeviceCommands")]
         [Authorize(Policy = "DeviceOnly")]
         [HttpPost]
-        public async Task<IActionResult> GetForceRead()
+        public async Task<IActionResult> GetDeviceCommands()
         {
-            
-            return Ok(await deviceInterface.GetForceRead(CurrentInfo.Id));
+        
+            return Ok(await deviceInterface.GetDeviceCommands(CurrentInfo.Id));
         }
 
-        [Route("GetForceActuatorOn")]
-        [Authorize(Policy = "DeviceOnly")]
-        [HttpPost]
-        public async Task<IActionResult> GetForceActuatorOn()
-        {
-  
-            return Ok(await deviceInterface.GetForceActuatorOn(CurrentInfo.Id));
-        }
 
-        [Route("GetForceActuatorOff")]
-        [Authorize(Policy = "DeviceOnly")]
-        [HttpPost]
-        public async Task<IActionResult> GetForceActuatorOff()
-        {
-            
-            return Ok(await deviceInterface.GetForceActuatorOff(CurrentInfo.Id));
-        }
 
         [Route("SendHeartBeat")]
         [Authorize(Policy = "DeviceOnly")]
