@@ -48,6 +48,7 @@ builder.Services.AddSwaggerGen(options =>
 });
 IConfiguration configuration = builder.Configuration;
 
+builder.Services.AddHostedService<DeviceStatusBackgroundService>();
 builder.Services.AddScoped<DeviceInterface, DeviceRepo>();
 builder.Services.AddScoped<UserInterface, UserRepo>();
 Env.Load();

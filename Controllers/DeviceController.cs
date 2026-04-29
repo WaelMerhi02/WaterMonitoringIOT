@@ -73,6 +73,14 @@ namespace WaterMonitoringIOT.Controllers
             return Ok(await deviceInterface.GetForceActuatorOff(CurrentInfo.Id));
         }
 
+        [Route("SendHeartBeat")]
+        [Authorize(Policy = "DeviceOnly")]
+        [HttpPost]
+        public async Task<IActionResult> SendHeartBeat(DateTime Date)
+        {
+            await deviceInterface.SendHeartBeat(CurrentInfo.Id, Date);
+            return Ok();
+        }
 
     }
 }

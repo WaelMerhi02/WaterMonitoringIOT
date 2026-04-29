@@ -11,5 +11,6 @@ namespace WaterMonitoringIOT.Interfaces
         public Task<bool> GetForceRead(int DeviceId);
         public Task<bool> GetForceActuatorOn(int DeviceId);
         public Task<bool> GetForceActuatorOff(int DeviceId);
+        public Task SendHeartBeat(int DeviceId,DateTime Date);
     }
 }

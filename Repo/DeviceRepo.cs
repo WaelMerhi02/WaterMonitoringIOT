@@ -31,6 +31,16 @@ namespace WaterMonitoringIOT.Repo
             return (true, token);
         }
 
+        public async Task SendHeartBeat(int DeviceId,DateTime Date)
+        {
+            Devices? device = await context.Devices.FirstOrDefaultAsync(d => d.Id == DeviceId);
+            if(!device.IsActive)
+                device.IsActive = true;
+
+            device.LastSeenAt = Date;
+            await context.SaveChangesAsync();
+        }
+
         public async Task UpdateDeviceStatus(int deviceId, bool isActive)
         {
             string connectionString = Environment.GetEnvironmentVariable("ConnString");
