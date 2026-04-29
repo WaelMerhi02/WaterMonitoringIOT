@@ -39,7 +39,7 @@
                     // silently ignore errors (optional: you can remove try-catch if you prefer crashing on error)
                 }
 
-                await Task.Delay(TimeSpan.FromSeconds(10), stoppingToken);
+                await Task.Delay(TimeSpan.FromSeconds(20), stoppingToken);
             }
         }
     }
