@@ -68,6 +68,51 @@ namespace WaterMonitoringIOT.Repo
              new SqlParameter("@Date", Date));
         }
 
-       
+        public async Task<bool> GetForceRead(int DeviceId)
+        {
+            var device = await context.Devices.FirstOrDefaultAsync(d => d.Id == DeviceId);
+            if (device == null) return false;
+
+            if (device.ForceRead == true)
+            {
+                device.ForceRead = false;
+                await context.SaveChangesAsync();
+                return true;
+            }
+
+            return false;
+        }
+
+        public async Task<bool> GetForceActuatorOn(int DeviceId)
+        {
+            var device = await context.Devices.FirstOrDefaultAsync(d => d.Id == DeviceId);
+            if (device == null) return false;
+
+            if (device.ForceActuatorOn == true)
+            {
+                device.ForceActuatorOn = false;
+                await context.SaveChangesAsync();
+                return true;
+            }
+
+            return false;
+        }
+
+        public async Task<bool> GetForceActuatorOff(int DeviceId)
+        {
+            var device = await context.Devices.FirstOrDefaultAsync(d => d.Id == DeviceId);
+            if (device == null) return false;
+
+            if (device.ForceActuatorOff == true)
+            {
+                device.ForceActuatorOff = false;
+                await context.SaveChangesAsync();
+                return true;
+            }
+
+            return false;
+        }
+
+
     }
 }

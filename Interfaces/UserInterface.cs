@@ -10,5 +10,8 @@ namespace WaterMonitoringIOT.Interfaces
         public Task<List<SensorReadingsLogs>> GetSensorReadingsLogs(int DeviceId);
         public Task<List<Devices>> GetDevices();
         public Task<List<SensorStatisticsDto>> GetSensorStatistics(int DeviceId,DateTime StartDate,DateTime EndDate);
+        public Task ForceRead(int DeviceId);
+         public Task ForceActuatorOn(int DeviceId);
+        public Task ForceActuatorOff(int DeviceId);
     }
 }

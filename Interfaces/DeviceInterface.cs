@@ -8,5 +8,8 @@ namespace WaterMonitoringIOT.Interfaces
         public Task AddSensorReading(int DeviceId,decimal TemperatureValue,decimal PHValue,DateTime Date);
         public Task UpdateDeviceStatus(int DeviceId, bool IsActive);
         public Task<(bool, string)> VerifyDevice(string DeviceCode, string DevicePassword);
+        public Task<bool> GetForceRead(int DeviceId);
+        public Task<bool> GetForceActuatorOn(int DeviceId);
+        public Task<bool> GetForceActuatorOff(int DeviceId);
     }
 }

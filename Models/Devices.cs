@@ -7,6 +7,9 @@
         public string DevicePassword { get; set; }
         public string DeviceName { get; set; }
         public bool IsActive { get; set; }
+        public bool ForceRead { get; set; }
+        public bool ForceActuatorOn { get; set; }
+        public bool ForceActuatorOff { get; set; }
         public DateTime? LastSeenAt { get; set; }
         public DateTime CreatedDate { get; set; }
 

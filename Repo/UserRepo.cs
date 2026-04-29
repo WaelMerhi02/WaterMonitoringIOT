@@ -72,5 +72,53 @@ namespace WaterMonitoringIOT.Repo
 
             return result;
         }
+
+        public async Task ForceRead(int DeviceId)
+        {
+            try
+            {
+                var device = await context.Devices.FirstOrDefaultAsync(d => d.Id == DeviceId);
+
+                device.ForceRead = true;
+
+                await context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        public async Task ForceActuatorOn(int DeviceId)
+        {
+            try
+            {
+                var device = await context.Devices.FirstOrDefaultAsync(d => d.Id == DeviceId);
+
+                device.ForceActuatorOn = true; // 👈 turn ON
+
+                await context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        public async Task ForceActuatorOff(int DeviceId)
+        {
+            try
+            {
+                var device = await context.Devices.FirstOrDefaultAsync(d => d.Id == DeviceId);
+
+                device.ForceActuatorOff = true;
+
+                await context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
     }
 }

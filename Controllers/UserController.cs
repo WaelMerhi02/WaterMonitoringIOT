@@ -75,5 +75,34 @@ namespace WaterMonitoringIOT.Controllers
             return Ok(await userInterface.GetSensorStatistics(DeviceId, StartDate, EndDate));
         }
 
+        [HttpPost]
+        [Authorize(Policy = "UserOnly")]
+        [Route("ForceRead")]
+        public async Task<IActionResult> ForceRead(int DeviceId)
+        {
+            await userInterface.ForceRead(DeviceId);
+            return Ok();
+        }
+
+        [HttpPost]
+        [Authorize(Policy = "UserOnly")]
+        [Route("ForceActuatorOn")]
+        public async Task<IActionResult> ForceActuatorOn(int DeviceId)
+        {
+            await userInterface.ForceActuatorOn(DeviceId);
+            return Ok();
+        }
+
+        [HttpPost]
+        [Authorize(Policy = "UserOnly")]
+        [Route("ForceActuatorOff")]
+        public async Task<IActionResult> ForceActuatorOff(int DeviceId)
+        {
+            await userInterface.ForceActuatorOff(DeviceId);
+            return Ok();
+        }
+
+
+
     }
 }
